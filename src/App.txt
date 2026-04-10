@@ -1,0 +1,93 @@
+import React from "react";
+import { useCalcularFinanzas } from "./Logic/CalcularFinanzas";
+import { Historial } from "./components/Historial/historial";
+import { UltimoIngreso } from "./components/Historial/UltimoIngreso";
+import { UltimoGasto } from "./components/Historial/UltimoGasto";
+
+//Navegacion
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { NavBar } from "./components/NavBar";
+import { Configuracion } from "./pages/Configuracion/Configuracion";
+
+//CSS
+import "./App.css";
+
+function App() {
+  // === Hooks ===
+  const {
+    total,
+    montoAgregar,
+    montoQuitar,
+    historial,
+    handleAgregar,
+    handleQuitar,
+    handleMontoAgregarChange,
+    handleMontoQuitarChange,
+    eliminarTransaccion,
+  } = useCalcularFinanzas();
+
+  return (
+    <>
+      <Router>
+        <div className="App">
+          <h1>💰 NexoFin</h1>
+
+          {/* Bloque 1: Total del dinero */}
+          <div className="bloque-total">
+            <h2>Balance Total</h2>
+            <p className={`total`}>${total}</p>
+          </div>
+
+          {/*Resumen*/}
+          <div className="resumenes-container">
+            <UltimoIngreso historial={historial} />
+            <UltimoGasto historial={historial} />
+          </div>
+
+          {/* Bloque 2: Agregar dinero */}
+          <div className="bloque-agregar">
+            <h3>➕ Agregar Ingreso</h3>
+            <input
+              type="number"
+              value={montoAgregar}
+              onChange={handleMontoAgregarChange}
+              placeholder="Monto a agregar"
+              min="0"
+              step="100"
+            />
+            <button onClick={handleAgregar}>Agregar</button>
+          </div>
+
+          {/* Bloque 3: Quitar dinero */}
+          <div className="bloque-quitar">
+            <h3>➖ Quitar Gasto</h3>
+            <input
+              type="number"
+              value={montoQuitar}
+              onChange={handleMontoQuitarChange}
+              placeholder="Monto a quitar"
+              min="0"
+              step="100"
+            />
+            <button onClick={handleQuitar}>Quitar</button>
+          </div>
+
+          {/* Nuevo Bloque: Historial */}
+          <Historial
+            historial={historial}
+            onEliminarTransaccion={eliminarTransaccion}
+            limite={5}
+          />
+
+          <Routes>
+            
+            <Route path="/actividad" element={<Actividad />} />
+            <Route path="/configuracion" element={<Configuracion />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
+  );
+}
+
+export default App;

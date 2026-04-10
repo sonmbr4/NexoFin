@@ -1,0 +1,91 @@
+/* pages/Configuracion/Configuracion.css */
+.configuracion-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 90px;
+}
+
+.configuracion-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.configuracion-header h1 {
+  margin: 0;
+  color: #333;
+}
+
+.configuracion-subtitle {
+  color: #666;
+  margin: 5px 0 0;
+  font-size: 0.9em;
+}
+
+.configuracion-secciones {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.config-seccion {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.config-seccion h2 {
+  margin: 0 0 20px;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.config-item {
+  margin-bottom: 20px;
+}
+
+.config-item:last-child {
+  margin-bottom: 0;
+}
+
+.config-item label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+}
+
+.config-item select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.config-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.version {
+  color: #999;
+  text-align: center;
+}
+
+.btn-acerca {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-acerca:hover {
+  background-color: #f5f5f5;
+  border-color: #999;
+}

@@ -1,0 +1,149 @@
+/* pages/Actividad/Actividad.css */
+.actividad-container {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 24px;
+  padding-bottom: 96px;
+  font-family: "Montserrat", "Segoe UI", sans-serif;
+  color: #0a1a54;
+}
+
+.actividad-header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.actividad-header h1 {
+  margin: 0;
+  color: #0a1a54;
+  font-size: clamp(1.65rem, 4.2vw, 2.1rem);
+  font-weight: 700;
+}
+
+.actividad-subtitle {
+  color: #60708f;
+  margin: 8px 0 0;
+  font-size: 1rem;
+}
+
+.estadisticas-container {
+  background:
+    linear-gradient(140deg, #001f62 0%, #07317e 100%),
+    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.2) 2px, transparent 2px);
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 26px;
+  padding: 20px;
+  box-shadow: 0 14px 28px rgba(2, 24, 80, 0.28);
+}
+
+.estadistica-card {
+  border-radius: 12px;
+  padding: 16px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.11);
+  backdrop-filter: blur(2px);
+}
+
+.estadistica-card.balance {
+  grid-column: span 2;
+  color: white;
+  background: transparent;
+  padding: 2px 0 10px;
+}
+
+.estadistica-label {
+  display: block;
+  font-size: 0.98rem;
+  color: #8bacee;
+  margin-bottom: 8px;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+
+.estadistica-card.balance .estadistica-label {
+  color: #95b5f2;
+}
+
+.estadistica-valor {
+  font-size: clamp(1.75rem, 4vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.estadistica-card.ingresos .estadistica-valor {
+  color: #ffffff;
+}
+
+.estadistica-card.gastos .estadistica-valor {
+  color: #ffffff;
+}
+
+.estadistica-card.balance .estadistica-valor {
+  color: white;
+  font-size: clamp(2.2rem, 6.2vw, 3.25rem);
+}
+
+.historial-completo h2 {
+  color: #0a1a54;
+  margin: 2px 0 14px;
+  font-size: clamp(1.45rem, 3.5vw, 1.9rem);
+  font-weight: 700;
+}
+
+.filtros-actividad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: #d9dce3;
+  border-radius: 18px;
+  padding: 6px;
+  margin: 2px 0 14px;
+}
+
+.filtro-btn {
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: #6d7584;
+  font-size: 1.08rem;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filtro-btn.activo {
+  background: #ffffff;
+  color: #091a54;
+  box-shadow: 0 4px 12px rgba(8, 25, 79, 0.14);
+}
+
+@media (max-width: 640px) {
+  .actividad-container {
+    padding: 16px;
+    padding-bottom: 92px;
+  }
+
+  .estadisticas-container {
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .estadistica-card {
+    padding: 14px;
+  }
+
+  .filtros-actividad {
+    gap: 6px;
+    padding: 5px;
+  }
+
+  .filtro-btn {
+    font-size: 0.88rem;
+    padding: 10px 6px;
+  }
+}

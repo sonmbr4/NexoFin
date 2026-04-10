@@ -1,0 +1,154 @@
+.historial-container {
+  border-radius: 16px;
+  background: #f4f6fa;
+  border: 1px solid #edf0f6;
+  box-shadow: 0 8px 20px rgba(10, 26, 73, 0.08);
+  padding: 18px;
+}
+
+.historial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.historial-container h2 {
+  margin: 0;
+  color: #08194f;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 700;
+}
+
+.historial-ocultas {
+  margin: 0 0 14px;
+  color: #6f7c93;
+  font-size: 0.9rem;
+}
+
+.historial-vacio {
+  text-align: center;
+  color: #7a869e;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.historial-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 420px;
+  overflow-y: auto;
+  display: grid;
+  gap: 12px;
+}
+
+.historial-item {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 12px rgba(8, 25, 79, 0.06);
+  border: 1px solid #eef1f7;
+}
+
+.historial-item:hover {
+  transform: translateY(-1px);
+}
+
+.historial-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.historial-descripcion {
+  font-weight: 700;
+  color: #08194f;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.historial-fecha {
+  font-size: 0.95rem;
+  color: #70809a;
+}
+
+.historial-monto-acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.historial-monto {
+  font-size: 1.05rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.historial-monto.ingreso {
+  color: #077264;
+}
+
+.historial-monto.gasto {
+  color: #6f1113;
+}
+
+.btn-eliminar {
+  border: none;
+  background: #eef2f9;
+  color: #51617d;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 8px 11px;
+  cursor: pointer;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.btn-eliminar:hover {
+  transform: translateY(-1px);
+  background: #e3e9f5;
+}
+
+.historial-lista::-webkit-scrollbar {
+  width: 7px;
+}
+
+.historial-lista::-webkit-scrollbar-track {
+  background: #e9edf6;
+  border-radius: 4px;
+}
+
+.historial-lista::-webkit-scrollbar-thumb {
+  background: #c4cee2;
+  border-radius: 4px;
+}
+
+.historial-lista::-webkit-scrollbar-thumb:hover {
+  background: #a7b4cf;
+}
+
+@media (max-width: 680px) {
+  .historial-item {
+    align-items: flex-start;
+  }
+
+  .historial-fecha {
+    font-size: 0.85rem;
+  }
+
+  .historial-monto {
+    font-size: 0.95rem;
+  }
+}
