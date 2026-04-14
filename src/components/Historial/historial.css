@@ -102,6 +102,21 @@
   color: #6f1113;
 }
 
+.historial-categoria{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.historial-categoria .categoria-icono {
+  font-size: 1.2em;
+}
+
+.historial-item {
+  border-left-width: 4px;
+}
+
 .btn-eliminar {
   border: none;
   background: #eef2f9;

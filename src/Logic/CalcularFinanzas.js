@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
+import { getCategoriaPorId } from "./categorias";
 
 export const useCalcularFinanzas = () => {
-
-
     //========= Constantes =========
     const STORAGE_KEY = {
         TOTAL: 'nexofin_total',
@@ -30,6 +29,10 @@ export const useCalcularFinanzas = () => {
     const [montoAgregar, setMontoAgregar] = useState('');
     const [montoQuitar, setMontoQuitar] = useState('');
     const [historial, setHistorial] = useState(historialInicial);
+    const [categoriaIngreso, setCategoriaIngreso] = useState('otro_ingreso');
+    const [categoriaGasto, setCategoriaGasto] = useState('otro_gasto');
+
+
 
     // === Guardar en localStorage ===
     useEffect(() => {
@@ -67,6 +70,7 @@ export const useCalcularFinanzas = () => {
         const monto = parseFloat(montoAgregar);
         if (!isNaN(monto) && monto > 0) {
             setTotal(prevTotal => prevTotal + monto);
+            const categoriaInfo = getCategoriaPorId(categoriaIngreso, 'ingreso')
 
             //Crear Transaccion
             const nuevaTransaccion = {
@@ -74,7 +78,10 @@ export const useCalcularFinanzas = () => {
                 tipo: 'ingreso',
                 monto: monto,
                 fecha: formatearFecha(),
-                descripcion: `Ingreso realizado el `
+                categoria: categoriaIngreso,
+                categoriaIcono: categoriaInfo.icono,
+                categoriaColor: categoriaInfo.color,
+                descripcion: categoriaInfo.nombre
             }
 
             setHistorial(prevHistorial => [nuevaTransaccion, ...prevHistorial]);
@@ -88,6 +95,7 @@ export const useCalcularFinanzas = () => {
         const monto = parseFloat(montoQuitar);
         if (!isNaN(monto) && monto > 0) {
             setTotal(prevTotal => prevTotal - monto);
+            const categoriaInfo = getCategoriaPorId(categoriaGasto, 'gasto');
 
             //Crear Transaccion
             const nuevaTransaccion = {
@@ -95,7 +103,10 @@ export const useCalcularFinanzas = () => {
                 tipo: 'gasto',
                 monto: monto,
                 fecha: formatearFecha(),
-                descripcion: `Gasto realizado el `
+                categoria: categoriaGasto,
+                categoriaIcono: categoriaInfo.icono,
+                categoriaColor: categoriaInfo.color,
+                descripcion: categoriaInfo.nombre
             }
 
             //Actualizar Historial
@@ -123,18 +134,24 @@ export const useCalcularFinanzas = () => {
     const handleMontoAgregarChange = (e) => setMontoAgregar(e.target.value);
     const handleMontoQuitarChange = (e) => setMontoQuitar(e.target.value);
 
+    const handleCategoriaIngresoChange = (e) => setCategoriaIngreso(e.target.value);
+    const handleCategoriaGastoChange = (e) => setCategoriaGasto(e.target.value);
     return {
         //Estados
         total,
         montoAgregar,
         montoQuitar,
         historial,
+        categoriaIngreso,
+        categoriaGasto,
 
         // Handlers
         handleAgregar,
         handleQuitar,
         handleMontoAgregarChange,
         handleMontoQuitarChange,
+        handleCategoriaIngresoChange,
+        handleCategoriaGastoChange,
         eliminarTransaccion,
     }
 }

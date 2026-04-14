@@ -1,0 +1,115 @@
+/* components/SelectorCategoria/SelectorCategoria.css */
+.selector-categoria {
+  position: relative;
+  width: 100%;
+}
+
+.selector-categoria-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1em;
+}
+
+.selector-categoria-btn:hover {
+  background: #f8f9fa;
+  border-color: #667eea !important;
+}
+
+.categoria-icono {
+  font-size: 1.3em;
+}
+
+.categoria-nombre {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+  color: #333;
+}
+
+.selector-flecha {
+  color: #999;
+  transition: transform 0.3s;
+  font-size: 0.8em;
+}
+
+.selector-flecha.abierto {
+  transform: rotate(180deg);
+}
+
+.selector-categoria-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  animation: slideDown 0.3s;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.categoria-opcion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.categoria-opcion:hover {
+  background: #f5f5f5;
+  border-left-color: var(--categoria-color);
+}
+
+.categoria-opcion.seleccionada {
+  background: rgba(102, 126, 234, 0.08);
+  border-left-color: var(--categoria-color);
+}
+
+.categoria-check {
+  color: var(--categoria-color);
+  font-weight: bold;
+  margin-left: auto;
+}
+
+/* Scroll personalizado */
+.selector-categoria-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.selector-categoria-dropdown::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.selector-categoria-dropdown::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.selector-categoria-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

@@ -1,60 +1,66 @@
-import React from "react";
-import "./historial.css";
+// components/Historial/historial.jsx
+import React from 'react';
+import './Historial.css';
 
 export const Historial = ({ historial, onEliminarTransaccion, limite = 5 }) => {
-  // === Funciones ===
-
+  // ========== FUNCIONES AUXILIARES ==========
   const formatearMonto = (monto, tipo) => {
-    const simbolo = tipo === "ingreso" ? "+" : "-";
-    return `${simbolo}$${monto}`;
+    const simbolo = tipo === 'ingreso' ? '+' : '-';
+    return `${simbolo} $${monto.toFixed(2)}`;
   };
 
   const historialLimitado = historial.slice(0, limite);
   const transaccionesOcultas = historial.length - limite;
 
-  // === Renderizado ===
+  // ========== RENDER ==========
   return (
     <div className="historial-container">
-      <div className="historial-header">
-        <h2>Recent Activity</h2>
-      </div>
-
+      <h2>📋 Historial de Transacciones</h2>
+      
       {transaccionesOcultas > 0 && (
         <p className="historial-ocultas">
-          Mostrando ultimas {limite} transacciones ({transaccionesOcultas} adicionales)
+          Mostrando últimas {limite} transacciones 
+          ({transaccionesOcultas} más no mostradas)
         </p>
       )}
-
+      
       {historialLimitado.length === 0 ? (
         <p className="historial-vacio">No hay transacciones registradas</p>
       ) : (
         <ul className="historial-lista">
           {historialLimitado.map((transaccion) => (
-            <li key={transaccion.id} className="historial-item">
+            <li 
+              key={transaccion.id} 
+              className={`historial-item ${transaccion.tipo}`}
+              style={{ borderLeftColor: transaccion.categoriaColor }}
+            >
               <div className="historial-info">
-                <span className="historial-descripcion">
-                  {transaccion.descripcion || "Movimiento"}
+                <div className="historial-categoria">
+                  <span className="categoria-icono">{transaccion.categoriaIcono}</span>
+                  <span className="historial-descripcion">
+                    {transaccion.descripcion}
+                  </span>
+                </div>
+                <span className="historial-fecha">
+                  {transaccion.fecha}
                 </span>
-                <span className="historial-fecha">{transaccion.fecha}</span>
               </div>
-
+              
               <div className="historial-monto-acciones">
                 <span className={`historial-monto ${transaccion.tipo}`}>
                   {formatearMonto(transaccion.monto, transaccion.tipo)}
                 </span>
-
-                <button
+                
+                <button 
                   className="btn-eliminar"
-                  onClick={() =>
-                    onEliminarTransaccion(
-                      transaccion.id,
-                      transaccion.tipo,
-                      transaccion.monto,
-                    )
-                  }
+                  onClick={() => onEliminarTransaccion(
+                    transaccion.id, 
+                    transaccion.tipo, 
+                    transaccion.monto
+                  )}
                   title="Eliminar transacción"
                 >
-                  Eliminar
+                  🗑️
                 </button>
               </div>
             </li>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useCalcularFinanzas } from "../../Logic/CalcularFinanzas";
+import { IngresoRecurrente } from "../../components/IngresoRecurrente/IngresoRecurrente";
+import { SelectorCategoria } from "../../components/SelectorCategoria/SelectorCategoria";
 import './Transacciones.css';
 
 export default function Transacciones() {
@@ -8,10 +10,14 @@ export default function Transacciones() {
     total,
     montoAgregar,
     montoQuitar,
+    categoriaIngreso,
+    categoriaGasto,
     handleAgregar,
     handleQuitar,
     handleMontoAgregarChange,
     handleMontoQuitarChange,
+    handleCategoriaIngresoChange,
+    handleCategoriaGastoChange,
   } = useCalcularFinanzas();
 
   // === Estado Local
@@ -69,6 +75,9 @@ export default function Transacciones() {
 
         <section className="panel-monto">
           <p className="monto-label">ENTER AMOUNT</p>
+          <div className="header-con-boton">
+            <IngresoRecurrente />
+          </div>
           <p className="monto-valor">$ {formatearMoneda(montoNumerico)}</p>
         </section>
 
@@ -88,6 +97,16 @@ export default function Transacciones() {
               GASTO
             </button>
           </div>
+        </div>
+
+        <div className="input-group">
+          <label>Categoria</label>
+          <SelectorCategoria
+            tipo={tabActiva}
+            categoriaSeleccionada={tabActiva === "ingreso" ? categoriaIngreso : categoriaGasto}
+            onChange={tabActiva === "ingreso" ? handleCategoriaIngresoChange : handleCategoriaGastoChange}
+          />
+
         </div>
 
         {/* Advertencia si el gasto es mayor al balance */}

@@ -27,6 +27,17 @@
   margin-bottom: 18px;
 }
 
+.header-con-boton {
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.header-con-boton h1 {
+  margin: 0;
+}
+
 .header-navigation {
   grid-template-columns: 34px 1fr 34px;
   align-items: center;
@@ -108,6 +119,49 @@
   color: var(--ink-main);
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(7, 26, 84, 0.12);
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  margin: 0 0 8px;
+  color: #5f687b;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.input-group .selector-categoria-btn {
+  border: 1px solid #d6dce7;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fc 100%);
+  border-radius: 14px;
+  min-height: 54px;
+  padding: 12px 14px;
+  box-shadow: 0 5px 14px rgba(6, 18, 60, 0.08);
+}
+
+.input-group .selector-categoria-btn:hover {
+  border-color: #9ca8c0 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #eef3fb 100%);
+}
+
+.input-group .selector-categoria-btn:focus-visible {
+  outline: 2px solid #8fa2cc;
+  outline-offset: 2px;
+}
+
+.input-group .selector-categoria-dropdown {
+  border: 1px solid #d8deea;
+  border-radius: 14px;
+  box-shadow: 0 16px 28px rgba(6, 18, 60, 0.14);
+}
+
+.input-group .categoria-opcion.seleccionada {
+  background: rgba(7, 26, 84, 0.08);
 }
 
 .detalle-grid {
@@ -272,6 +326,11 @@
 
   .teclado-grid {
     gap: 12px 8px;
+  }
+
+  .input-group .selector-categoria-btn {
+    min-height: 50px;
+    padding: 10px 12px;
   }
 
   .tecla {
