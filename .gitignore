@@ -1,0 +1,55 @@
+## Dependencies
+node_modules/
+Client/node_modules/
+Server/node_modules/
+
+## Environment variables
+.env
+.env.*
+!.env.example
+Client/.env
+Client/.env.*
+!Client/.env.example
+Server/.env
+Server/.env.*
+!Server/.env.example
+
+## Expo / React Native
+.expo/
+.expo-shared/
+Client/.expo/
+Client/.expo-shared/
+dist/
+Client/dist/
+web-build/
+Client/web-build/
+
+## Build / cache
+coverage/
+Client/coverage/
+Server/coverage/
+.cache/
+.parcel-cache/
+.turbo/
+tmp/
+temp/
+
+## Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+## OS / editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+## Misc
+*.pem
