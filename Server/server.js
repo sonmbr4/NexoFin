@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const transactionsRouter = require('./routes/transactions');
+const boxRouter = require('./routes/boxes');
+
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(express.json());
 
 //Rutas
 app.use('/api/transactions', transactionsRouter);
+app.use('/api/boxes', boxRouter)
+
 
 //coneción a mongo y inicio de servidor
 mongoose.connect(process.env.MONGODB_URI)

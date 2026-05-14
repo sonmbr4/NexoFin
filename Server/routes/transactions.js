@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const Transaction = require('../models/Transaction');
 
 //Obtener todas las transacciones ordenadas por fecha
@@ -273,25 +274,7 @@ router.post('/process-recurring', async (req, res) => {
     }
 });
 
-// Eliminar una transacción
-router.delete('/:id', async (req, res) => {
-    console.log('🔍 DELETE recibido para ID:', req.params.id); // Depurar
 
-    try {
-        const transaction = await Transaction.findByIdAndDelete(req.params.id);
-
-        if (!transaction) {
-            console.log('❌ Transacción no encontrada');
-            return res.status(404).json({ message: 'Transacción no encontrada' });
-        }
-
-        console.log('💾 Eliminando transacción con ID:', req.params.id);
-        res.json({ message: 'Transacción eliminada' });
-    } catch (error) {
-        console.error('💥 Error al eliminar:', error);
-        res.status(500).json({ message: 'Error al eliminar transacción' });
-    }
-})
 
 //Actualizar una transaccion
 router.put('/:id', async (req, res) => {
@@ -317,6 +300,106 @@ router.put('/:id', async (req, res) => {
         res.status(500).json({ message: 'Error al actualizar transacción', error });
     }
 })
+
+//Eliminar una transaccion
+router.delete('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'ID de transacción inválido' });
+        }
+
+        const deletedTransaction = await Transaction.findByIdAndDelete(id);
+
+        if (!deletedTransaction) {
+            return res.status(404).json({ message: 'Transacción no encontrada' });
+        }
+
+        res.json({
+            message: 'Transacción eliminada correctamente',
+            transaction: deletedTransaction
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al eliminar transacción', error });
+    }
+})
+
+
+//Obtener estadisticas mensuales
+router.get('/stats/monthly', async (req, res) => {
+    try{
+        const { year = new Date().getFullYear(), type } = req.query;
+        const parsedYear = parseInt(year, 10);
+
+        const query = {
+            date: {
+                $gte: new Date(`${parsedYear}-01-01`),
+                $lt: new Date(`${parsedYear + 1}-01-01`)
+            }
+        };
+
+        if(type && ['income', 'expense'].includes(type)){
+            query.type = type;
+        }
+
+        const stats = await Transaction.aggregate([
+            { $match: query },
+            {
+                $group:{
+                    _id:{
+                        month:{$month: '$date'},
+                        type: '$type'
+                    },
+                    total: {$sum: '$amount'}
+                }
+            },
+            {
+                $group: {
+                    _id: '$_id.month',
+                    income: {
+                        $sum: {
+                            $cond: [{ $eq: ['$_id.type', 'income'] }, '$total', 0]
+                        }
+                    },
+                    expense: {
+                        $sum: {
+                            $cond: [{ $eq: ['$_id.type', 'expense'] }, '$total', 0]
+                        }
+                    }
+                }
+            },
+            { $sort: { _id: 1 } }
+        ]);
+
+        const monthlyData = Array.from({ length: 12 }, (_, index) => {
+            const month = index + 1;
+            const monthStats = stats.find((item) => item._id === month);
+
+            return {
+                month,
+                income: monthStats?.income || 0,
+                expense: monthStats?.expense || 0,
+            };
+        });
+
+        res.json({
+            year: parsedYear,
+            monthlyData,
+            totals: {
+                income: monthlyData.reduce((sum, m) => sum + m.income, 0),
+                expense: monthlyData.reduce((sum, m) => sum + m.expense, 0)
+            }
+        });
+    } catch (error){
+        res.status(500).json({ message: 'Error al obtener estadisticas', error })
+    }
+});
+
+
+
+
+
 
 
 
